@@ -24,7 +24,7 @@ app.post("/posts", async (c) => {
 });
 
 // GET Requests
-app.get("/", (c) => c.text("Hello World! Rev"));
+app.get("/", (c) => c.text("Hello World! Rev2"));
 
 app.get("/posts", async (c) => {
   try {
