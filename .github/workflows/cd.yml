@@ -27,8 +27,7 @@ jobs:
         run: |
           curl -X POST "http://4.186.63.11:5125/deploy" \
             -H "Content-Type: application/json" \
-            -d "{ \"repo_name\": \"${REPO}\" ,\"scripts\": \"${B64_SCRIPT}\"
-            }"
+            -d "{ \"repo_name\": \"${REPO}\" ,\"scripts\": \"${B64_SCRIPT}\" }"
 
       - name: Clean up temp files
         run: rm -f init_script.txt script_b64.txt
