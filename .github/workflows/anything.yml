@@ -1,0 +1,14 @@
+name: CI-CD Test
+on:
+  push:
+    branch:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test the CI-CD
+        run: echo "CI-CD Test"
