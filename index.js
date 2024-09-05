@@ -21,6 +21,7 @@ app.post("/posts", async (c) => {
   }
 });
 
+app.get("/", (c) => c.redirect("/posts"));
 app.get("/posts", async (c) => {
   try {
     const posts = await prisma.post.findMany();
