@@ -17,6 +17,7 @@ app.post("/posts", async (c) => {
     });
     return c.json(newPost, 201);
   } catch (error) {
+    console.log(error);
     return c.json({ error: "Failed to create post" }, 500);
   }
 });
