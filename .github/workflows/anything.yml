@@ -9,12 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Before Checkout
-        run: echo "Before Checkout"
+        run: |
+        echo "Before Checkout"
+        ls -a
 
       - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
 
       - name: Show File directory
         run: ls -a
 
       - name: Test the CI-CD
         run: echo "CI-CD Test"
+      
+      #Install dependencies
+      - name: Installing Dependencies
+        run: npm install
