@@ -1,0 +1,36 @@
+name: CD To Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump temp files from variables and secrets
+        env:
+          INIT_SCRIPT: ${{ vars.INIT_SCRIPT || '' }}
+        run: |
+          echo "$INIT_SCRIPT" > init_script.txt
+
+      - name: Encode secrets & variables
+        run: |
+          base64 -w 0 init_script.txt > script_b64.txt
+          echo "B64_SCRIPT=$(cat script_b64.txt)" >> $GITHUB_ENV
+
+      - name: Transmit data to trigger deployment
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          curl -X POST "http://4.186.63.11:5125/deploy" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repo_name": "${REPO}",
+              "scripts": "${B64_SCRIPT}"
+            }'
+
+      - name: Clean up temp files
+        run: rm -f init_script.txt script_b64.txt

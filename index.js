@@ -23,7 +23,9 @@ app.post("/posts", async (c) => {
   }
 });
 
-app.get("/", (c) => c.redirect("/posts"));
+// GET Requests
+app.get("/", (c) => c.text("Hello World!"));
+
 app.get("/posts", async (c) => {
   try {
     const posts = await prisma.post.findMany();
@@ -55,5 +57,10 @@ serve(
     fetch: app.fetch,
     port: process.env.PORT || 3000,
   },
-  () => console.log("Server running at Localhost")
+  () =>
+    console.log(
+      `Server running on http://localhost:${process.env.PORT || 3000}`
+    )
 );
+
+console.log("New Server LOGS");
