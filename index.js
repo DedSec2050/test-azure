@@ -6,7 +6,6 @@ import "dotenv/config";
 const app = new Hono();
 const prisma = new PrismaClient();
 
-// Modified POST Request
 app.post("/posts", async (c) => {
   const { title, content, owner } = await c.req.json();
 
